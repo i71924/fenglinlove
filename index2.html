@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婚禮座位查詢系統</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 1em;
+            background-color: #fff7f0;
+            color: #333;
+        }
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 2em;
+            background: #fff;
+            border-radius: 1em;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            margin: 1em 0;
+        }
+        input, button {
+            font-size: 1.2em;
+            padding: 0.75em;
+            border: 1px solid #ccc;
+            border-radius: 0.5em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ff7a59;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #ff5a36;
+        }
+        #result {
+            margin-top: 1.5em;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FengLin in Love</h1>
+        <h2>婚禮座位查詢</h2>
+        <p>請輸入您的姓名：</p>
+        <div class="input-group">
+            <input type="text" id="nameInput" placeholder="例如：王小明" />
+            <button onclick="searchSeat()">查詢</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const guests = [
+            {name: "王小明", seat: "A1"},
+            {name: "吳小美", seat: "A2"},
+            {name: "馮曉春", seat: "B3"}
+        ];
+
+        function searchSeat() {
+            const input = document.getElementById("nameInput").value.trim();
+            const resultDiv = document.getElementById("result");
+            const guest = guests.find(g => g.name === input);
+
+            if (guest) {
+                resultDiv.innerHTML = `<strong>${guest.name}</strong><br>您的座位是：<strong>${guest.seat}</strong>`;
+            } else {
+                resultDiv.innerHTML = "查無此人，請確認姓名輸入正確。";
+            }
+        }
+    </script>
+</body>
+</html>
