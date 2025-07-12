@@ -50,10 +50,10 @@
             font-weight: bold;
             color: #222;
         }
-        #result-image {
-            margin-top: 1em;
+        #welcome-image {
+            margin-top: 1.5em;
         }
-        #result-image img {
+        #welcome-image img {
             max-width: 100%;
             height: auto;
             border-radius: 1em;
@@ -63,6 +63,9 @@
 <body>
     <div class="container">
         <h1>FengLin in Love</h1>
+        <div id="welcome-image">
+            <img src="images/welcomepic.jpg" alt="Welcome Picture">
+        </div>
         <h2>婚禮座位查詢</h2>
         <p>請輸入您的姓名：</p>
         <div class="input-group">
@@ -70,9 +73,6 @@
             <button onclick="searchSeat()">查詢</button>
         </div>
         <div id="result"></div>
-        <div id="result-image">
-            <img src="images/welcomepic.jpg" alt="感謝蒞臨">
-        </div>
     </div>
 
     <script>
@@ -85,15 +85,12 @@
         function searchSeat() {
             const input = document.getElementById("nameInput").value.trim();
             const resultDiv = document.getElementById("result");
-            const resultImage = document.getElementById("result-image");
             const guest = guests.find(g => g.name === input);
 
             if (guest) {
                 resultDiv.innerHTML = `<strong>${guest.name}</strong><br>您的座位是：<strong>${guest.seat}</strong>`;
-                resultImage.style.display = "block";
             } else {
                 resultDiv.innerHTML = "查無此人，請確認姓名輸入正確。";
-                resultImage.style.display = "none";
             }
         }
     </script>
