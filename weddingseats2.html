@@ -1,0 +1,32 @@
+<script>
+    let guests = [];
+
+    // 從 seats.csv 載入資料
+    fetch('seats.csv')
+        .then(response => response.text())
+        .then(data => {
+            const lines = data.split('\\n');
+            guests = lines
+                .slice(1) // 跳過表頭
+                .filter(line => line.trim() !== "")
+                .map(line => {
+                    const [name, seat] = line.split(',');
+                    return { name: name.trim(), seat: seat.trim() };
+                });
+        })
+        .catch(error => {
+            console.error("讀取 seats.csv 發生錯誤：", error);
+        });
+
+    function searchSeat() {
+        const input = document.getElementById("nameInput").value.trim();
+        const resultDiv = document.getElementById("result");
+        const guest = guests.find(g => g.name === input);
+
+        if (guest) {
+            resultDiv.innerHTML = `<strong>${guest.name}</strong><br>您的座位是：<strong>${guest.seat}</strong>`;
+        } else {
+            resultDiv.innerHTML = "查無此人，請確認姓名輸入正確。";
+        }
+    }
+</script>
