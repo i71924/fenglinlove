@@ -1,4 +1,85 @@
-<script>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婚禮座位查詢系統</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 1em;
+            background-color: #fff7f0;
+            color: #333;
+        }
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 2em;
+            background: #fff;
+            border-radius: 1em;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            margin: 1em 0;
+        }
+        input, button {
+            font-size: 1.2em;
+            padding: 0.75em;
+            border: 1px solid #ccc;
+            border-radius: 0.5em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #5A5AAD;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #5A5AAD;
+        }
+        #result {
+            margin-top: 1.5em;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #222;
+        }
+        #welcome-image {
+            margin-top: 1.5em;
+        }
+        #welcome-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FengLin in Love</h1>
+        <h2>婚禮座位查詢</h2>
+        <p>請輸入您的姓名：</p>
+
+        <div class="input-group">
+            <input type="text" id="nameInput" placeholder="例如：王小明" />
+            <button onclick="searchSeat()">查詢</button>
+        </div>
+
+        <!-- 👇 查詢結果放在這裡 -->
+        <div id="result"></div>
+
+        <!-- 👇 圖片放在查詢結果下方 -->
+        <div id="welcome-image">
+            <img src="images/welcomepic.jpg" alt="Welcome Picture">
+        </div>
+    </div>
+
+    <script>
     let guests = [];
 
     // 從 seats.csv 載入資料
@@ -30,3 +111,5 @@
         }
     }
 </script>
+</body>
+</html>
