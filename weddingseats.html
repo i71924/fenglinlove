@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -63,14 +62,18 @@
 <body>
     <div class="container">
         <h1>FengLin in Love</h1>
-        
         <h2>婚禮座位查詢</h2>
         <p>請輸入您的姓名：</p>
+
         <div class="input-group">
             <input type="text" id="nameInput" placeholder="例如：王小明" />
             <button onclick="searchSeat()">查詢</button>
         </div>
+
+        <!-- 👇 查詢結果放在這裡 -->
         <div id="result"></div>
+
+        <!-- 👇 圖片放在查詢結果下方 -->
         <div id="welcome-image">
             <img src="images/welcomepic.jpg" alt="Welcome Picture">
         </div>
