@@ -87,6 +87,7 @@
         .then(response => response.text())
         .then(data => {
             const lines = data.split('\\n');
+            console.log("載入的名單：", guests);
             guests = lines
                 .slice(1) // 跳過表頭
                 .filter(line => line.trim() !== "")
