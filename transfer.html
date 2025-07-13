@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>CSV 轉 JS 陣列工具</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Microsoft JhengHei", sans-serif;
+      padding: 2em;
+      background-color: #f2f2f2;
+      color: #333;
+      text-align: center;
+    }
+    h1 {
+      color: #5A5AAD;
+    }
+    input, button {
+      font-size: 1em;
+      padding: 0.5em;
+      margin: 0.5em 0;
+    }
+    button {
+      background-color: #5A5AAD;
+      color: white;
+      border: none;
+      border-radius: 0.4em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4a4a9e;
+    }
+    pre {
+      text-align: left;
+      background: #fff;
+      padding: 1em;
+      border-radius: 0.5em;
+      border: 1px solid #ccc;
+      max-width: 100%;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    #copySuccess {
+      color: green;
+      font-size: 0.9em;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSV → JavaScript 陣列轉換器</h1>
+  <p>請上傳一份包含 <code>name,seat</code> 欄位的 CSV 檔案</p>
+  <input type="file" id="csvFile" accept=".csv" />
+  <br>
+  <button onclick="convertCSV()">轉換</button>
+  <button onclick="copyToClipboard()">複製到剪貼簿</button>
+  <div id="copySuccess"></div>
+  <pre id="output" placeholder="轉換後的陣列會顯示在這裡"></pre>
+
+  <script>
+    function convertCSV() {
+      const file = document.getElementById('csvFile').files[0];
+      if (!file) return alert("請先選擇一個 CSV 檔案");
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const text = e.target.result;
+        const lines = text.split(/\r?\n/).filter(line => line.trim() !== "");
+        if (lines.length <= 1) {
+          document.getElementById("output").textContent = "CSV 檔案內容有誤或為空。";
+          return;
+        }
+
+        const result = [];
+        for (let i = 1; i < lines.length; i++) {
+          const [name, seat] = lines[i].split(',');
+          if (name && name.trim() !== "" && seat) {
+            result.push(`  { name: "${name.trim()}", seat: "${seat.trim()}" }`);
+          }
+        }
+
+        const jsArray = "const guests = [\n" + result.join(",\n") + "\n];";
+        document.getElementById("output").textContent = jsArray;
+        document.getElementById("copySuccess").textContent = "";
+      };
+
+      reader.readAsText(file, "UTF-8");
+    }
+
+    function copyToClipboard() {
+      const output = document.getElementById("output").textContent;
+      if (!output.trim()) {
+        alert("目前沒有可複製的內容！");
+        return;
+      }
+
+      navigator.clipboard.writeText(output).then(() => {
+        document.getElementById("copySuccess").textContent = "✅ 已複製到剪貼簿！";
+      }).catch(err => {
+        alert("複製失敗：" + err);
+      });
+    }
+  </script>
+</body>
+</html>
