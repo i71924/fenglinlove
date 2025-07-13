@@ -73,6 +73,11 @@
         <!-- 👇 查詢結果放在這裡 -->
         <div id="result"></div>
 
+        <!-- 查詢結果的桌號圖片 -->
+        <div id="table-image" style="display: none; margin-top: 1em;">
+          <img id="tableImageTag" src="" alt="桌號圖片" style="max-width: 100%; border-radius: 1em;" />
+        </div>
+
         <!-- 👇 圖片放在查詢結果下方 -->
         <div id="welcome-image">
             <img src="images/welcomepic.jpg" alt="Welcome Picture">
@@ -110,12 +115,21 @@
     function searchSeat() {
         const input = document.getElementById("nameInput").value.trim();
         const resultDiv = document.getElementById("result");
+        const tableImageDiv = document.getElementById("table-image");
+        const tableImageTag = document.getElementById("tableImageTag");
+
         const guest = guests.find(g => g.name === input);
 
         if (guest) {
-            resultDiv.innerHTML = `<strong>${guest.name}</strong><br>您的座位是：<strong>${guest.seat}</strong>`;
+          resultDiv.innerHTML = `<strong>${guest.name}</strong><br>您的座位是：<strong>${guest.seat}</strong>`;
+    
+          // 設定桌號圖片路徑
+          const imagePath = `images/${guest.seat}.jpg`;
+          tableImageTag.src = imagePath;
+          tableImageDiv.style.display = "block";
         } else {
-            resultDiv.innerHTML = "查無此人，請確認姓名輸入正確。";
+          resultDiv.innerHTML = "查無此人，請確認姓名輸入正確。";
+          tableImageDiv.style.display = "none";
         }
     }
 </script>
