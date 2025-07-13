@@ -80,25 +80,32 @@
     </div>
 
 <script>
-    let guests = [];
-
-    // 從 seats.csv 載入資料
-    fetch('seats.csv')
-        .then(response => response.text())
-        .then(data => {
-            const lines = data.split('\\n');
-            console.log("載入的名單：", guests);
-            guests = lines
-                .slice(1) // 跳過表頭
-                .filter(line => line.trim() !== "")
-                .map(line => {
-                    const [name, seat] = line.split(',');
-                    return { name: name.trim(), seat: seat.trim() };
-                });
-        })
-        .catch(error => {
-            console.error("讀取 seats.csv 發生錯誤：", error);
-        });
+    const guests = [
+      { name: "馮俊益", seat: "主桌" },
+      { name: "楊惠珊", seat: "主桌" },
+      { name: "林文雄", seat: "主桌" },
+      { name: "曾碧瑩", seat: "主桌" },
+      { name: "馮博凱", seat: "主桌" },
+      { name: "林貝珊", seat: "主桌" },
+      { name: "匡夢麟", seat: "主桌" },
+      { name: "徐素萍", seat: "主桌" },
+      { name: "林文壹", seat: "主桌" },
+      { name: "曾志文", seat: "主桌" },
+      { name: "楊鵬程", seat: "主桌" },
+      { name: "陳宜菁", seat: "主桌" },
+      { name: "周新國", seat: "A1" },
+      { name: "黃元修", seat: "A1" },
+      { name: "邱景祥", seat: "A1" },
+      { name: "沈義哲", seat: "A1" },
+      { name: "吳明郎", seat: "A1" },
+      { name: "蘇家彥", seat: "A1" },
+      { name: "陳俊青", seat: "A1" },
+      { name: "楊雲忠", seat: "A1" },
+      { name: "許峻瑋", seat: "A1" },
+      { name: "郭乃誠", seat: "A1" },
+      { name: "鄭翔文", seat: "A1" },
+      { name: "林登港", seat: "A1" }
+    ];
 
     function searchSeat() {
         const input = document.getElementById("nameInput").value.trim();
